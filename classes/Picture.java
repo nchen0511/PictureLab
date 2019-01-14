@@ -97,6 +97,59 @@ public class Picture extends SimplePicture
       }
     }
   }
+  public void zeroRed()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setRed(0);
+      }
+    }
+  }
+  public void zeroGreen()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setGreen(0);
+      }
+    }
+  }
+  public void Negate()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setGreen(255-pixelObj.getGreen());
+        pixelObj.setBlue(255-pixelObj.getBlue());
+        pixelObj.setRed(255-pixelObj.getRed());
+      }
+    }
+  }
+  public void grayScale()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        int changer = (int) ((pixelObj.getGreen()+pixelObj.getBlue()+pixelObj.getRed())/3);
+        pixelObj.setGreen(changer);
+        pixelObj.setBlue(changer);
+        pixelObj.setRed(changer);
+      }
+    }
+  }
+
+
+
   
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
@@ -217,16 +270,40 @@ public class Picture extends SimplePicture
     }
   }
   
-  
+  public void fixUnderwater()  {
+    Pixel[][] pixels = this.getPixels2D();
+    int total =0;
+    int num = 0;
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        int contrast = (pixelObj.getBlue() + pixelObj.getRed() + pixelObj.getGreen())
+                / 3;
+        total += contrast;
+        num++;
+      }
+    }
+    int contrast = (int) (total /= num);
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setBlue(5 * (pixelObj.getBlue() - contrast));
+        pixelObj.setRed(4 * (pixelObj.getRed() - contrast));
+        pixelObj.setGreen(3 * (pixelObj.getGreen() - contrast));
+      }
+    }
+  }
   /* Main method for testing - each class in Java can have a main 
    * method 
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("beach.jpg");
+    Picture beach = new Picture("water.jpg");
+    beach.fixUnderwater();
     beach.explore();
-    beach.zeroBlue();
-    beach.explore();
+
   }
   
 } // this } is the end of class Picture, put all new methods before this
