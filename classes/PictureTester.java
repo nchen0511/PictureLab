@@ -6,24 +6,24 @@
  * 
  * @author Barbara Ericson 
  */
-public class PictureTester
-{
-  /** Method to test zeroBlue */
-  public static void testZeroBlue()
-  {
+public class PictureTester {
+  /**
+   * Method to test zeroBlue
+   */
+  public static void testZeroBlue() {
     Picture beach = new Picture("beach.jpg");
     beach.zeroBlue();
     beach.explore();
   }
-  public static void testNegate()
-  {
+
+  public static void testNegate() {
     Picture beach = new Picture("beach.jpg");
     beach.Negate();
     beach.explore();
 
   }
-  public static void testKeepOnlyBlue()
-  {
+
+  public static void testKeepOnlyBlue() {
     Picture beach = new Picture("beach.jpg");
     beach.zeroRed();
     beach.zeroGreen();
@@ -31,84 +31,103 @@ public class PictureTester
 
     beach.explore();
   }
-  public static void testGrayscale()
-  {
+
+  public static void testGrayscale() {
     Picture beach = new Picture("beach.jpg");
     beach.grayScale();
     beach.explore();
   }
-  /** Method to test mirrorVertical */
-  public static void testMirrorVertical()
-  {
+
+  /**
+   * Method to test mirrorVertical
+   */
+  public static void testMirrorVertical() {
     Picture caterpillar = new Picture("caterpillar.jpg");
     caterpillar.explore();
     caterpillar.mirrorVertical();
     caterpillar.explore();
   }
-  public static void testMirrorVerticalRightToLeft(){
+
+  public static void testMirrorVerticalRightToLeft() {
     Picture caterpillar = new Picture("caterpillar.jpg");
     caterpillar.mirrorVerticalRightToLeft();
     caterpillar.explore();
   }
-  public static void testMirrorHorizontal(){
+
+  public static void testMirrorHorizontal() {
     Picture caterpillar = new Picture("caterpillar.jpg");
     caterpillar.mirrorHorizontal();
     caterpillar.explore();
   }
-  public static void testMirrorHorizontalBotToTop(){
+
+  public static void testMirrorHorizontalBotToTop() {
     Picture caterpillar = new Picture("caterpillar.jpg");
     caterpillar.mirrorHorizontalBotToTop();
     caterpillar.explore();
   }
-  public static void testMirrorDiagonal(){
+
+  public static void testMirrorDiagonal() {
     Picture caterpillar = new Picture("beach.jpg");
     caterpillar.mirrorDiagonal();
     caterpillar.explore();
   }
-  /** Method to test mirrorTemple */
-  public static void testMirrorTemple()
-  {
+
+  /**
+   * Method to test mirrorTemple
+   */
+  public static void testMirrorTemple() {
     Picture temple = new Picture("temple.jpg");
     temple.explore();
     temple.mirrorTemple();
     temple.explore();
   }
-   public static void testMirrorArms()
-  {
+
+  public static void testMirrorArms() {
     Picture temple = new Picture("snowman.jpg");
-    temple.explore();
     temple.mirrorArms();
     temple.explore();
   }
-  public static void testMirrorGull()
-  {
+
+  public static void testMirrorGull() {
     Picture temple = new Picture("seagull.jpg");
     temple.explore();
     temple.mirrorGull();
     temple.explore();
   }
 
-  /** Method to test the collage method */
-  public static void testCollage()
-  {
+  /**
+   * Method to test the collage method
+   */
+  public static void testCollage() {
     Picture canvas = new Picture("640x480.jpg");
     canvas.createCollage();
     canvas.explore();
   }
-  
-  /** Method to test edgeDetection */
-  public static void testEdgeDetection()
-  {
+
+  /**
+   * Method to test edgeDetection
+   */
+  public static void testEdgeDetection() {
     Picture swan = new Picture("swan.jpg");
+    swan.explore();
     swan.edgeDetection(10);
     swan.explore();
   }
-  public static void testFixUnderwater()
-  {
+
+  public static void testFixUnderwater() {
     Picture beach = new Picture("water.jpg");
-  //  beach.fixUnderwater();
+    //  beach.fixUnderwater();
     beach.explore();
   }
+  public static void testCopy()
+  {
+    Picture canvas = new Picture("beach.jpg");
+    canvas.myCollage();
+    canvas.explore();
+  }
+
+
+
 
   
   /** Main method for testing.  Every class can have a main
@@ -131,12 +150,13 @@ public class PictureTester
  //   testMirrorHorizontalBotToTop();
 //    testMirrorDiagonal();
 //    testMirrorTemple();
-    testMirrorArms();
- //   testMirrorGull();
+    //testMirrorArms();
+  //  testMirrorGull();
     //testMirrorDiagonal();
-    //testCollage();
+   // testCollage();
+
     //testCopy();
-    //testEdgeDetection();
+    testEdgeDetection();
     //testEdgeDetection2();
     //testChromakey();
     //testEncodeAndDecode();

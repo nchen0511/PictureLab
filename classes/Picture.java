@@ -294,6 +294,21 @@ public class Picture extends SimplePicture
         rightPixel.setColor(leftPixel.getColor());
       }
     }
+
+    for (int row = 160; row < 180; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 308; col > mirrorPoint; col--)
+      {
+
+        leftPixel = pixels[row][col];
+        rightPixel = pixels[row+100]
+                [mirrorPoint - col + mirrorPoint];
+        rightPixel.setColor(leftPixel.getColor());
+      }
+    }
+
+
     System.out.println(count);
   }
    public void mirrorGull()
@@ -327,31 +342,52 @@ public class Picture extends SimplePicture
     * @param startRow the start row to copy to
     * @param startCol the start col to copy to
     */
-  public void copy(Picture fromPic, 
-                 int startRow, int startCol)
+  public void copy(Picture fromPic,int startRow, int startCol)
   {
     Pixel fromPixel = null;
     Pixel toPixel = null;
     Pixel[][] toPixels = this.getPixels2D();
     Pixel[][] fromPixels = fromPic.getPixels2D();
-    for (int fromRow = 0, toRow = startRow; 
-         fromRow < fromPixels.length &&
-         toRow < toPixels.length; 
-         fromRow++, toRow++)
+    for (int fromRow = 0, toRow = startRow; fromRow < fromPixels.length && toRow < toPixels.length; fromRow++, toRow++)
     {
-      for (int fromCol = 0, toCol = startCol; 
-           fromCol < fromPixels[0].length &&
-           toCol < toPixels[0].length;  
-           fromCol++, toCol++)
+      for (int fromCol = 0, toCol = startCol; fromCol < fromPixels[0].length && toCol < toPixels[0].length; fromCol++, toCol++)
       {
         fromPixel = fromPixels[fromRow][fromCol];
         toPixel = toPixels[toRow][toCol];
         toPixel.setColor(fromPixel.getColor());
       }
-    }   
+    }
+  }
+  public void copy2(Picture fromPic,int startRow,int startCol, int endRow, int endCol)
+  {
+    Pixel fromPixel = null;
+    Pixel toPixel = null;
+    Pixel[][] toPixels = this.getPixels2D();
+    Pixel[][] fromPixels = fromPic.getPixels2D();
+    for (int fromRow = startRow, toRow = endRow; fromRow < fromPixels.length && toRow < toPixels.length; fromRow++, toRow++)
+    {
+      for (int fromCol = startCol, toCol = endCol; fromCol < fromPixels[0].length && toCol < toPixels[0].length; fromCol++, toCol++)
+      {
+        fromPixel = fromPixels[fromRow][fromCol];
+        toPixel = toPixels[toRow][toCol];
+        toPixel.setColor(fromPixel.getColor());
+      }
+    }
+  }
+  public void myCollage(){
+    Picture flower1 = new Picture("flower1.jpg");
+    this.copy2(flower1,0,0,100,100);
+    this.copy2(flower1,40,11,70,24);
+    Picture flower2 = new Picture("flower1.jpg");
+    flower2.zeroBlue();
+    this.copy2(flower2,70,50,200,200);
+    Picture flower3 = new Picture("snowman.jpg");
+    flower3.mirrorVertical();
+    this.copy2(flower3,175,100,20,20);
   }
 
-  /** Method to create a collage of several pictures */
+
+    /** Method to create a collage of several pictures */
   public void createCollage()
   {
     Picture flower1 = new Picture("flower1.jpg");
@@ -367,6 +403,7 @@ public class Picture extends SimplePicture
     this.mirrorVertical();
     this.write("collage.jpg");
   }
+
   
   
   /** Method to show large changes in color 
@@ -380,6 +417,7 @@ public class Picture extends SimplePicture
     Color rightColor = null;
     for (int row = 0; row < pixels.length; row++)
     {
+
       for (int col = 0; 
            col < pixels[0].length-1; col++)
       {
@@ -392,7 +430,24 @@ public class Picture extends SimplePicture
         else
           leftPixel.setColor(Color.WHITE);
       }
+
     }
+    for (int row = 0; row < pixels.length; row++)
+    {
+         for (int col = 0; col < pixels[0].length-1; col++)
+        {
+          if(row+1 < pixels.length)
+          {
+           leftPixel = pixels[row][col];
+           rightPixel = pixels[row + 1][col];
+           rightColor = rightPixel.getColor();
+           if (leftPixel.colorDistance(rightColor) > edgeDist)
+               leftPixel.setColor(Color.BLACK);
+           else
+               leftPixel.setColor(Color.WHITE);
+          }
+        }
+  }
   }
   
   public void fixUnderwater()  {
